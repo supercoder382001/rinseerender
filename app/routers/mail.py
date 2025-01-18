@@ -155,7 +155,7 @@ async def invoice(order_id: int):
 
     mode_of_payment = "Credit Card"
 
-    signature_image_path = "/content/Picture1.png"  # Update with the correct image path
+    signature_image_path = os.path.join(os.getcwd(), 'app/assets/Picture1.png')
 
     # Generate the invoice PDF
     file_path = f"invoice_{order_id}.pdf"
