@@ -8,6 +8,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
 import json
+from app.model import mailed
 
 app = FastAPI()
 router = APIRouter()
@@ -124,8 +125,8 @@ def generate_invoice(filename, company_details, client_details, items, total_amo
     pdf.save()
 
 
-@router.post("/invoice/{order_id}")
-async def invoice(order_id: str):
+@router.post("/invoice/")
+async def invoice(mails: mailed):
     # Example company and client details
     company_details = [
         "Your Company Name",
