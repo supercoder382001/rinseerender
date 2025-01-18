@@ -125,7 +125,7 @@ def generate_invoice(filename, company_details, client_details, items, total_amo
 
 
 @router.post("/invoice/{order_id}")
-async def invoice(order_id: int):
+async def invoice(order_id: str):
     # Example company and client details
     company_details = [
         "Your Company Name",
