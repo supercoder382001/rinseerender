@@ -28,7 +28,7 @@ response_pending = {
 }
 
 
-async def event_stream(order_id: int):
+async def event_stream(order_id: str):
     while True:
         # Query the latest payment status for the user
         response = supabase.table("phonepe").select("*").eq('merchantTransactionId', order_id).limit(1).execute()
@@ -52,5 +52,5 @@ async def event_stream(order_id: int):
 
 
 @router.post("/checkPayment")
-async def checkPayment(order_id: int):
+async def checkPayment(order_id: str):
     return StreamingResponse(event_stream(order_id), media_type="text/event-stream")
