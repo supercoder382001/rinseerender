@@ -166,5 +166,5 @@ async def invoice(mails: mailed):
     with open(file_path, "rb") as pdf_file:
         send_email(file_path, pdf_file.read())
 
-    # return json.dumps({"message":True})
-    return FileResponse(file_path, media_type="application/pdf", filename=file_path)
+    return ({"message":True})
+    # return FileResponse(file_path, media_type="application/pdf", filename=file_path)
