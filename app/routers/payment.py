@@ -32,22 +32,23 @@ async def event_stream(order_id: int):
     while True:
         # Query the latest payment status for the user
         response = supabase.table("phonepe").select("*").eq('merchantTransactionId', order_id).limit(1).execute()
-        print(response)
+
+        # Check if response contains any data and handle accordingly
         if response.data:
-            decoded_bytes = base64.b64decode(response.data[0].get("response"))
-            json_response = decoded_bytes.decode('utf-8')
-            json_data = json.loads(json_response)
-        if response.data and json_data["data"]["state"] == "COMPLETED":
-            yield f"data: {json.dumps(response_success)}\n\n"
-            break
-            await asyncio.sleep(10)
-        elif response.data and json_data["data"]["state"] == "FAILED":
-            yield f"data: {json.dumps(response_failed)}\n\n"
-            break
-            await asyncio.sleep(10)
+            payment_data = response.data[0]  # Access the first item in the list
+
+            if payment_data["state"] == "COMPLETED":
+                yield f"data: {json.dumps(response_success)}\n\n"
+                break
+            elif payment_data["state"] == "FAILED":
+                yield f"data: {json.dumps(response_failed)}\n\n"
+                break
+            else:
+                yield f"data: {json.dumps(response_pending)}\n\n"
         else:
             yield f"data: {json.dumps(response_pending)}\n\n"
-            await asyncio.sleep(5)  # Stream updates every 5 seconds
+
+        await asyncio.sleep(10)  # Stream updates every 10 seconds
 
 
 @router.post("/checkPayment")
