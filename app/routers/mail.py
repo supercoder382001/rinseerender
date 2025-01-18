@@ -159,7 +159,7 @@ async def invoice(mails: mailed):
     signature_image_path = os.path.join(os.getcwd(), 'app/assets/Picture1.png')
 
     # Generate the invoice PDF
-    file_path = f"invoice_{order_id}.pdf"
+    file_path = f"invoice_{mails.order_id}.pdf"
     generate_invoice(file_path, company_details, client_details, items, total_amount, order_details, mode_of_payment, signature_image_path)
 
     # Send the email with the generated PDF
