@@ -8,7 +8,7 @@ from email.mime.multipart import MIMEMultipart
 from email.mime.base import MIMEBase
 from email import encoders
 import json
-from app.model import mailed
+from app.models import mailed
 
 app = FastAPI()
 router = APIRouter()
