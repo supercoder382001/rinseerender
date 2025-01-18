@@ -16,3 +16,6 @@ class total(BaseModel):
     longitude: str
     name: str
     method:int
+
+class mailed(BaseModel):
+    order_id:str
