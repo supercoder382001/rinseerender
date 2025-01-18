@@ -31,7 +31,7 @@ response_pending = {
 async def event_stream(order_id: int):
     while True:
         # Query the latest payment status for the user
-        response = supabase.table("testphonepe").select("*").eq('id', order_id).limit(1).execute()
+        response = supabase.table("phonepe").select("*").eq('merchantTransactionId', order_id).limit(1).execute()
         print(response)
         if response.data:
             decoded_bytes = base64.b64decode(response.data[0].get("response"))
