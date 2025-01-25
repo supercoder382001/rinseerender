@@ -17,5 +17,9 @@ class total(BaseModel):
     name: str
     method:int
 
-class mailed(BaseModel):
-    order_id:str
+
+class phone(BaseModel):
+    mid: str
+    muid: int
+    amount: float
+    mno: str
