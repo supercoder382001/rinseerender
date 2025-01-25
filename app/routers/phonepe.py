@@ -22,7 +22,7 @@ def geocode(mid: str,muid: str,amount: float, mno:str):
         "mobileNumber": mno
     }
 
-    response = requests.get(external_api_url, headers=headers, json=bo)
+    response = requests.post(external_api_url, headers=headers, json=bo)
     if response.status_code == 200:
         try:
             response_data = response
