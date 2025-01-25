@@ -1,5 +1,7 @@
 from fastapi import FastAPI
 from app.routers import mail, map, payment,phonepe
+from fastapi.middleware.cors import CORSMiddleware
+
 
 app = FastAPI()
 
