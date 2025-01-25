@@ -44,6 +44,6 @@ def geocode(mid,muid,amount,mno):
         }
 
 
-@router.post("/payment/")
+@router.post("/payment")
 async def payment(item: phone):
     return geocode(item.mid,item.muid,item.amount,item.mno)
