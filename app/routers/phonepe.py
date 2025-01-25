@@ -16,10 +16,10 @@ def geocode(mid: str,muid: str,amount: float, mno:str):
         "Content-Type": "application/json"
     }
     bo = {
-        "merchantTransactionId": item.mid,
-        "merchantUserId": item.muid,
-        "amount": item.amount,
-        "mobileNumber": item.mno
+        "merchantTransactionId": mid,
+        "merchantUserId": muid,
+        "amount": amount,
+        "mobileNumber": mno
     }
 
     response = requests.get(external_api_url, headers=headers, json=bo)
