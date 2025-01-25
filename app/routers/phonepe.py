@@ -25,7 +25,7 @@ def geocode(mid: str,muid: str,amount: float, mno:str):
     response = requests.get(external_api_url, headers=headers, json=bo)
     if response.status_code == 200:
         try:
-            response_data = response.json()
+            response_data = response
 
             return {
                 "message": "Successfully fetched and processed data from external API",
