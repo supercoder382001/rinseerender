@@ -32,16 +32,13 @@ async def event_stream(order_id: int):
     while True:
         # Query the latest payment status for the user
         response = supabase.table("phonepe").select("*").eq('merchantTransactionId', order_id).limit(1).execute()
-        print(response)
         if response.data:
-            decoded_bytes = base64.b64decode(response.data[0].get("response"))
-            json_response = decoded_bytes.decode('utf-8')
-            json_data = json.loads(json_response)
-        if response.data and json_data["data"]["state"] == "COMPLETED":
+            json_data = response.data[0]
+        if response.data and json_data["state"] == "COMPLETED":
             yield f"data: {json.dumps(response_success)}\n\n"
             break
             await asyncio.sleep(10)
-        elif response.data and json_data["data"]["state"] == "FAILED":
+        elif response.data and json_data["state"] == "FAILED":
             yield f"data: {json.dumps(response_failed)}\n\n"
             break
             await asyncio.sleep(10)
