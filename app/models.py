@@ -20,6 +20,6 @@ class total(BaseModel):
 
 class phone(BaseModel):
     mid: str
-    muid: int
+    muid: str
     amount: float
     mno: str
